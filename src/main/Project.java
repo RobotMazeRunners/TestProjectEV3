@@ -2,16 +2,15 @@ package main;
 
 //Main class for starting threads and initializing the program.
 public class Project {
-
-	Movement mvr = new Movement();
-	ColorSensor csr = new ColorSensor();
+	
+	public static Robot rbt = new Robot();
 	
 	public static void main(String[] args) {
-		MovementThread mvrThread = new MovementThread();
-		SensorThread csrThread = new SensorThread();
+		Runnable mvrThread = new MovementThread(rbt);
+		Runnable csrThread = new SensorThread(rbt);
 		
-		mvrThread.start();
-		csrThread.start();
+		new Thread(mvrThread).start();
+		new Thread(csrThread).start();
 	}
 
 }
